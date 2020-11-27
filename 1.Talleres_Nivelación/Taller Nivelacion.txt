@@ -1,0 +1,52 @@
+1.Niveles arquitectura :
+
+Nivel Fisico: Manera donde se guardan los datos.
+Nivel Lógico: Manera como se resguardan los datos independiente del fisico.
+Nivel Externo: Manera como el usuario final persibe los datos.
+
+2.Defina tabla, llave foranea, campo, registro? 
+
+tabla:
+Estructura de datos donde se almacena información.
+
+Llave foranea o Llave externa:
+Puede ser: Simple o Compuesta (Campo o campos de una tabla que en otra tabla están referenciados como primaria)
+Campo o campos de una tabla que evidencia una relación con otra tabla de nivel superior.
+
+Campo:
+Atributo descriptivo de una tabla.
+Unidad Mínima de una tabla.
+Se expresan como columnas en la tabla
+
+Registro:
+Conjunto de información referida a una tabla.
+Se expresan como filas.
+
+
+3.Que es una base de datos relacional?
+
+Conjunto de tablas que estan relacionadas entre si evitando al maximo la redundancia, que tienen por objetivo almacenar,
+procesar y consultar información cuyo proposito principal es la toma de desiciones.
+
+4.Que representa la cardinalidad entre dos tablas?
+Factor numerico que me indica a lo sumo cuantas filas de una tabla se conectan con cuantas filas de la otra
+Número de conexiones entre tablas.
+
+5.Que representa un campo nulo?
+Campo indeterminado igual a nada, sirve para gestionar informacion
+
+6.Que es un gestor de base de datos? 
+(Administrar)
+Sowftware que administra los recursos fisicos y lógicos de la base de datos.
+
+7.Que es una tupla, y un dominio en bases de datos relacionales?
+
+tupla:
+Porción de registro.
+dominio:
+Tipo de dato y longitud que puede tener un campo de una tabla.
+
+
+Hacer tarea.
+
+

@@ -1,0 +1,39 @@
+
+--Inicio de nuestro bloque anónimo:
+DECLARE
+  --Declarando dos variables sencillas, edad y nombre:
+	opcion NUMBER:=2;
+	nombre VARCHAR2(39):='Cristian Duran';
+
+--Lógica de nuestro programa:
+BEGIN
+	--Una 'case' funciona de manera similar a la programación, se puede usar para variables o columnas de tablas:
+	CASE opcion
+		--El 'WHEN' se usa como el 'case' de programación, y se lee 'Cuando opcion, Entonces haga algo':
+		WHEN 1 THEN DBMS_OUTPUT.put_line('Usted ha seleccionado la opción ' || opcion);
+		
+		WHEN 2 THEN DBMS_OUTPUT.put_line('Usted ha seleccionado la opción ' || opcion);
+
+		WHEN 3 THEN DBMS_OUTPUT.put_line('Usted ha seleccionado la opción ' || opcion);
+
+		WHEN 4 THEN DBMS_OUTPUT.put_line('Usted ha seleccionado la opción ' || opcion);
+		
+		--Por último el caso por defecto para cuando ninguna de las opciones anteriores se cumple:
+		ELSE
+			DBMS_OUTPUT.put_line('Opción no contemplada');
+	
+	--Final de nuestro CASE:		
+	END CASE;
+
+EXCEPTION
+	WHEN OTHERS THEN
+		NULL;
+
+END;		 
+
+--Como ejemplo ilustrativo también podemos realizar estructuras 'CASE' para consultas sql, en el siguiente ejemplo creamos una columna
+-- 'Clasificación' en el cual hacemos una 'especie' de semaforización:
+SELECT IDEMPLEADO,
+       NOMBREEMP,
+			 CASE WHEN SALARIO<3000 THEN 'BAJO' WHEN SALARIO>3000 AND SALARIO <5000 THEN 'Medio' ELSE 'Alto'  END Clasificacion
+			 FROM AEROEMPLEADOS;

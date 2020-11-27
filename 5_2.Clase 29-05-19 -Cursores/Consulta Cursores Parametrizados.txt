@@ -1,0 +1,16 @@
+			Cursores Parametrizados:
+
+Los cursores con parámetros son útiles cuando queremos restringir los resultados de la consulta,
+también son prácticos porque los declararemos como variables (no es necesario reescribir el código) 
+y si no es necesario utilizar todas las columnas devueltas (como cuando se usa la sentencia FETCH).
+
+			Ejemplo:
+
+DECLARE
+   CURSOR c_prueba(dato1 NUMBER, dato2 VARCHAR2) IS
+      SELECT s.col1, s.col2, s.col3
+        FROM sales s
+       WHERE s.YEAR = dato1
+         AND s.status = dato2; 
+ 
+OPEN c_prueba(2007, 'cerrado')  

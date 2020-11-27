@@ -1,0 +1,1 @@
+Anio	Mes	CodigoPais	PaisDestino	CodigoDepto	DepartamentoOrigen	Partida	Cadena	Producto	CodigoUnidad	CantidadUnidades	ValorMilesFOBDol	ValorMilesPesos	VolumenToneladas

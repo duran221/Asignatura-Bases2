@@ -1,0 +1,206 @@
+				Cursor:
+
+
+Apuntador a un conjunto de filas resultantes de una consulta sql o de una operación DML. Siendo DML:
+Lenguaje de manipulación de datos:
+
+	
+Objetivo: Evitar ocupar espacio físico en disco, (Una estructura que se guarda en memoria ram 'temporal') y que puede ser
+usado cuando el usuario lo decee.
+
+
+				Existen dos tipos:
+
+---Implicito: Sistema
+---Explicitos: Proveedor de aplicaciones.
+
+
+				Ambos deben cumplir tres requisitos:
+
+	1. Definición de cursor.
+	2. Apertura de Cursor.
+	3. Recorrido de el cursor.
+	4. Cierre del cursor.
+
+
+-Un cursor se crea al momento que el se abre. Los cursores deben recorrerse o extrerse a travéz de bucles.
+
+
+				Primitivas o Funciones.
+
+
+Cuando el cursor es implícito: SQL%Found. (Lo genera el lenguaje)
+
+Devuelve verdadero si el cursor devuelve datos, de lo contrario devuelve FALSO.
+
+
+
+Si el cursor es explicito: <Identificador>%FOUND.
+
+Algunos CURSORES COMUNES:
+
+SQL%NOTFOUND:						<IDENTIFICADOR>%NOTFOUND 
+Devuelve verdadero si la el cursor no devuelve datos.
+
+
+
+SQL%ROWCOUNT						<IDENTIFICADOR>%ROWCOUNT
+Devuelve la cantidad de columnas de el cursor		
+
+
+SQL%ISOPEN						<IDENTIFICADOR>%ISOPEN
+Devuelve TRUE si el cursor está abierto.	
+
+
+Nota:Si yo selecciono todos los estudiantes de la tabla estudiantes me genera un cursor IMPLICITO.
+
+
+					Cuando se usa CURSORES?
+
+Un cursor es una estructura necesaria cuando el resultado de una consulta  involucra MÁS DE UNA FILA.
+
+----------------------------------                  -------------------------------------------------
+
+
+					Estructura:
+
+DECLARE
+
+	--Declaramos el cursor. Debemos declararlo e inicializar la consulta inmediatamente:
+	CURSOR nombre IS SELECT * FROM TABLA;
+
+
+BEGIN
+	--Open :abre el cursor (Obligatorio), en este momento se ejecuta la consulta SQL que tiene asociada.
+	OPEN NOMBRECUROR
+
+
+	--Bucle de estraccion: Donde se recorre dicho cursor
+	LOOP
+	
+		--Extraemos el cursor: y lo asignamos a las variables 
+		FETCH nombre INTO <VARIABLES>
+
+		--Salgase cuando no existan valores
+		EXIT WHEN nombre%NOTFOUND;
+
+	END LOOP;
+	
+	--Se cierra el cursor (OBLIGATORIO).	
+	CLOSE nombre
+END;
+
+
+----------------------------------              --------------------------------------------------------------
+
+				Ejemplo:
+
+--Ejercicio cursores implícitos: Con un bloque anónimo recibir por pantalla:
+- -Un nombre y un apellido, en caso que dicho nombre y dicho apellido exista en la tabla estudiantes,
+--entonces actualizar sus créditos, sumando 2 a los créditos almacenados. En caso que no exista ningún estudiante,
+--con ese nombre y ese apellido, entonces adicionarlo a la tabla estudiantes. asociando la especialidad 'Músico' y 
+-- con créditos iguales al máximo numero de créditos de los estudiantes cuya especialidad es música.
+
+--Informar en la tabla temporal si dicha información fue actualizada o fué adicionada.
+			
+	
+				Analisis:
+
+--se recibe un nombre y un apellido, se recibe a travéz de variables de sustitución.
+--Se realiza una actualización NO UNA CONSULTA SELECT.
+--No se dice nada sobre el id
+--Se debe usar cursores porque es probable que se vaya a modificar más de un valor.
+
+
+				Qué variables necesito?
+
+Necesito una variable que me calcule el ID.
+Hay que calcular también los creditos, en el caso de que el estudiante no exista.
+
+
+--Defino el cursor: --Cuando son explícitos se definen en la zona de declaración, cuando son implícitos se nombran en la zona de
+--Código
+
+Para este ejercicio voy a usar entonces un cursor implicito, porque la consulta está involucrada en el UPDATE.
+
+
+--Primero los créditos no van a ser estáticos, van a entrar con variable de sustitución
+--Pero si esos créditos que están entrando superan el máximo de creditos de todos los extudiantes
+--entonces se debe almacenar en temporal diciendo que los creditos son invalidos, lo mismo con créditos negativos,
+--los creditos no deben ser inferiores a el mínimo de créditos de todos los estudiantes.
+--La especialidad en caso de que el estudiante no esté también entra como una variable de sustitución
+--pero si meten una especialidad que no esté en la base de datos, lanzar a temporal especialidad no Válida
+--Sacar en la tabla temporal tambien, cuando diga registro modificado, cuantos registros modificó
+
+
+
+
+
+-------------------------------------- 			Solución                 -------------------------------------------------------------
+
+
+
+--Como aquí la consulta involucraba actualización operación DML se usó cursor implicito.
+
+DECLARE 
+	--Declaro una variable de sustitución:
+	--Con esto garantizo que los tipos son compatibles a los de la tabla para hacer la búsqueda
+
+	Vn estudiantes.nombre%type :='&Inserte_Nombre';
+	Va estudiantes.apellido%type := '&Inserte_Apellido';
+	
+	--Defino la variable que me procesa el ID, en caso de que el alumno no exista
+	Vid number:=0;
+	
+	-- Defino la variable que me calcula los Créditos:
+	Vc number:=0;
+	
+	--Defino el cursor: --Cuando son explícitos se definen en la zona de declaración, cuando son implícitos se nombran en la zona de
+	--Código inmediatamente despues de una instrucción DML
+	
+BEGIN
+	--Borro la tabla temporal.
+	DELETE FROM TEMPORAL;
+	
+	--Como el update hace una búsqueda para actualizar, es absurdo hacer un SELECT.
+
+    
+	UPDATE ESTUDIANTES 
+	SET CREDITOS=CREDITOS+2
+	WHERE UPPER(NOMBRE)=UPPER(Vn) AND UPPER(APELLIDO)=UPPER(Va);
+
+	
+	--Despues de que se evalúa la actualización se genera un Cursor IMPLÍCITO con LAS FILAS que se actualizaron.
+	--Siendo así vamos a evalúar si hay gente con ese nombre y apellido
+	--Si se encontró el cursor
+	IF SQL%FOUND THEN
+		--Inserte 
+		INSERT INTO TEMPORAL(COLUMNACARACTER) VALUES('REGISTROS MODIFICADOS');
+		
+	--Si no había ninguna persona con ese nombre y apellido:
+	ELSE
+		
+		--Me falta calcular el id y los créditos para hacer la inserción:
+		--Debo garantizar que el ID no se vaya a repetir ni el sea nulo:
+		--Le sumo 1 el máximo id que exista
+		SELECT MAX(ID)+1 INTO Vid
+		FROM ESTUDIANTES;
+		
+		--Ahora calculamos los créditos:
+		SELECT MAX(CREDITOS) INTO Vc
+		FROM ESTUDIANTES WHERE UPPER(ESPECIALIDAD)='MUSICA';
+		
+		--Insertamos en la tabla ESTUDIANTES 
+		INSERT INTO ESTUDIANTES VALUES(Vid,Vn,Va,'MUSICA',Vc);
+		
+		INSERT INTO TEMPORAL(COLUMNACARACTER) VALUES('REGISTRO ADICIONADO');
+		
+	END IF,
+		
+END;  
+
+---------------------------------------------------            ------------------------------------------------------------
+
+Correo del docente: oscar.bedoya@ucaldas.edu.co
+
+

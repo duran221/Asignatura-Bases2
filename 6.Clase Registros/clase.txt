@@ -1,0 +1,90 @@
+TIPO DE DATO COMPUESTO QUE PUEDE ALMACENAR INFORMACION DE DISTINTO TIPO.
+
+--Registros
+--Estudiantes
+
+
+
+DECLARE
+
+Vregistro Estudiantes%RowType;
+
+BEGIN 
+
+	select nombre into
+	
+	Vregistro.nombre
+	from estudiantes
+	where id=5;
+
+	dbms_output.put_line(Vregistro.nombre);	
+
+END;
+-------------------------------------        ---------------------------
+
+
+
+DECLARE
+
+Vregistro Estudiantes%RowType;
+
+Cursor MIC is select * from Estudiantes;
+
+BEGIN 
+
+	open MIC;
+	fetch MIC into Vregistro;
+
+	WHILE MIC%FOUND
+	LOOP
+	
+		dbms_output.put_line(Vregistro.ID || vregistro.apellido);	
+		
+		fetch MIC into Vregistro;	
+	
+	END LOOP;
+    
+	close MIC;
+
+END;
+
+--------------------------------------------		----------------------------------------------
+
+DECLARE
+
+TYPE Mu
+
+
+BEGIN
+
+
+
+
+END;
+
+
+
+
+
+generar la nota de lo tre parciales de cada estudiante en cada materia incolucrada
+
+Se debe ir de lo mas especifico a lo más general.
+
+
+DECLARE
+
+--Es un registro:
+TYPE LASNOTAS IS RECORD
+(
+P1 NUMBER()
+)
+
+
+BEGIN
+
+
+
+END;
+
+
+

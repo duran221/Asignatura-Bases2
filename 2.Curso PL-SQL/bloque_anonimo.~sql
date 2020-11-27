@@ -1,0 +1,26 @@
+
+--1. Así realizamos un comando de una linea:
+
+/* Asi realizamos un 
+comentario multilinea*/
+
+DECLARE
+    --En esta sección se declaran las variables:
+    
+    --Declarando una variable de tipo VARCHAR2:
+    CADENA VARCHAR2(50):='Hola mundo';
+
+BEGIN
+--En esta otra sección se declara la lógica de programación de nuestra base de datos:
+    
+    DBMS_OUTPUT.PUT_LINE(CADENA);
+
+EXCEPTION
+--Control de errores (opcional)
+    
+    WHEN OTHERS THEN
+    
+        dbms_output.put_line('PROBLEMA');
+    
+
+END;

@@ -1,0 +1,66 @@
+1.Limpiar el archivo con excel (Asentos,Comas)
+
+2. Cuando todo esté listo copiar la carpeta a C.
+
+3.entrar a CMD:
+
+4.dirigirse a la carpeta raiz en donde están los archivos:
+
+5.digitar->sqlplus
+
+Ingresar las credenciales:
+
+hr 
+hr
+
+El siguiente comando sirve para verificar si está tomando el archivo de el script creado para la tabla:
+Nota: (Debe tener creado un archivo con extensión sql con el script para crear la tabla)
+
+Luego digitar:
+
+SQL> edit creatabla
+
+SQL> @creatabla
+
+
+Con esto hemos creado la esctructura de la tabla, Al crear el script no hacerlo con espacios ni nada.
+
+
+6.Abrir el loader.ctl y en infile 'archivo_limpio.csv', luego modificar las columnas
+debe quedar algo así:
+
+------------------------------------			-------------------------------------
+load data
+infile 'archivo_limpio.csv' 
+into table EXPORTACIONES
+fields terminated by ";"
+TRAILING NULLCOLS
+(ID,
+ANIO,
+MES,
+CodigoPais,
+PaisDestino,
+CodigoDepto,
+DepartamentoOrigen, 
+Partida,
+Cadena, 
+Producto,
+CodigoUnidad,
+CantidadUnidades 
+ValorMilesFOBDol NUMBER,
+ValorMilesPesos,
+VolumenToneladas terminated by whitespace)
+
+---------------------------------------------			---------------------------------------
+
+7. teclear:  host
+
+luego: sqlldr hr/hr
+
+saldrá algo parecido a:
+
+->control-- cafe
+
+donde café corresponde a el archivo con extensón .ctl que contiene el loader.
+
+opcionalmente revisar el archivo que se genera cafe.log y verificar que no se muestre ningún error:

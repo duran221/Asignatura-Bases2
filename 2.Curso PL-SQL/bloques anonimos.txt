@@ -1,0 +1,22 @@
+			Bloques anónimos:
+
+
+Estructura básica de lo que vendría siendo un programa en la base de datos:
+
+Ejecuta acciones o procedimientos en la base de datos, su codigo o estructura nunca se guarda en la base de datos.
+
+Consta de cuatro partes:
+
+DECLARE:
+--Declaración de variables se hace aquí
+BEGIN
+
+--Lógica de programación
+
+
+--Esta instrucción 'EXCEPTION' es opcional
+EXCEPTION
+
+--Control de errores 
+
+END

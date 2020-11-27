@@ -1,0 +1,51 @@
+BEGIN
+
+-------------------------------------------------
+LOOP 
+
+<BLOQUE>
+
+EXIT WHEN <CONDICION>
+
+END LOOP;
+
+
+------------------------------------------
+
+
+WHILE <CONDICION>
+
+LOOP
+
+<BLOQUE_INSTRUCCIONES>
+
+
+END LOOP;
+
+
+
+
+FOR VARX IN VALOR1..VALOR2
+
+LOOP
+
+	<BLOQUE INSTRUCCIONES>;
+
+END LOOP;
+
+
+
+FOR VARX IN REVERSE VALOR1..VALOR2
+
+LOOP
+
+	<BLOQUE INSTRUCCIONES>;
+
+END LOOP;
+
+
+Ejemplo: Pedir por pantalla dos valores e insertar en la tabla temporal los números comprendidos entre esos valores
+Ejemplo: Pedir por pantalla un número entero de un dígito y almacenar en temporal los primeros 20 números múltiplos de ese número
+Ejemplo: Pedir por pantalla dos valores e insertar en la tabla temporal los números primos comprendidos entre
+
+Leer sobre cursores:

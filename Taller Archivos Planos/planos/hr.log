@@ -1,0 +1,8 @@
+
+SQL*Loader: Release 11.2.0.2.0 - Production on Sáb Jun 8 20:33:03 2019
+
+Copyright (c) 1982, 2009, Oracle and/or its affiliates.  All rights reserved.
+
+SQL*Loader-500: Unable to open file (sqlldr hr/hr.ctl)
+SQL*Loader-553: file not found
+SQL*Loader-509: System error: El sistema no puede encontrar el archivo especificado.

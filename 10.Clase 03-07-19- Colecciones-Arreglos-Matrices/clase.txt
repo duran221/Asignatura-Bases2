@@ -1,0 +1,223 @@
+
+			Estructuras compuestas:
+
+
+Colecciones:	Arreglo,Matriz.
+
+
+Nota: En la posicion 0 no se encuentra nada, los accesos van desde -infinito hasta +infinito.
+exceptuando cero.
+
+SET SERVEROUTPUT ON;
+DECLARE
+
+--Creando la estructura
+TYPE Micole Is TABLE OF VARCHAR2(100)
+INDEX BY BINARY_INTEGER;
+
+--Instanciando la estructura:
+MiColeccion Micole;
+
+contador NUMBER:=1;
+
+
+
+BEGIN
+    DBMS_OUTPUT.PUT_LINE('Indice            Valor');
+    
+	FOR I IN(SELECT ID AS IDD,APELLIDO||''||NOMBRE AS REGISTRO FROM ESTUDIANTES)
+		LOOP
+
+			Micoleccion(i.idd):= i.registro;
+            
+		END LOOP;
+        DBMS_OUTPUT.PUT_LINE('Numero de indices'||Micoleccion.count);
+        Micoleccion.delete(8);
+        DBMS_OUTPUT.PUT_LINE('En total:'||Micoleccion.count);
+        Micoleccion.delete(11,25);     
+        
+        DBMS_OUTPUT.PUT_LINE('Apuntador al primero:'||Micoleccion.first||'Valor:'||Micoleccion(Micoleccion.first));
+        DBMS_OUTPUT.PUT_LINE('Apuntador al primero:'||Micoleccion.first||'Valor:'||Micoleccion(Micoleccion.next(Micoleccion.first)));        
+        DBMS_OUTPUT.PUT_LINE('Apuntador al último:'||Micoleccion.last);
+
+END;
+/
+
+
+La coleccion eS una eStructura de datoS aconSejable para evadir loS problemaS de mutacion de diSparoS
+
+
+Los indices no pueden recorrerse uno a uno porque se genera una excepcion.
+
+Primitivas:
+
+
+NombredeColeccion.count: Devuelve la cantidad de elementos de esa coleccion
+NombredeColeccion.delete: Borra todos los elementos de la coleccion
+NombredeColeccion.delete(n): Borra el indice n de la coleccion
+NombredeColeccion.delete(i,j) borra desde el indice i a el indice j
+
+NombredeColeccion.first: devuelve el apuntador de el primer elemento de la coleccion: (El de más a la izquierda)
+devuelve el (puntero)
+
+NombredeColeccion.last: devuelve el apuntador de el último elemento de la coleccion
+NombredeColeccion.next(indice): Ir un paso adelante de el índice proporcionado.
+NombredeColeccion.prior(indice): Ir a elemento anterior de ese índice
+NombredeColeccion.exists(i); :Devuelve un booleano indicando si existe el elemento.
+
+Ejercicio:
+Hacer un pequeño proceso que me muestre lo que hay almacenado de atrás para adelante sin tocar la consulta:
+indice		Valor
+500		Gomez Juan
+
+Usando un bucle While:
+
+DECLARE
+
+
+INICIO BINARY-INTEGER;
+FIN BINARY-INTEGER;
+
+
+
+BEGIN
+
+
+INICIO:=Micoleccion.first;
+FIN:= Micoleccion.last;
+
+WHILE FIN>=INICIO
+LOOP
+
+	DMBs_OUTPUT.PUT_LINE('indice:'||FIN||'Valor:'||Micoleccion(FIN));
+	FIN:=Micoleccion.prior(FIN);
+
+
+
+END LOOP;
+
+
+--Usando un for:
+
+FOR I IN REVERSE MiColeccion.first..Micoleccion.last
+LOOP
+	IF MiColeccion.Exists(i) THEN
+		DMBs_OUTPUT.PUT_LINE('indice:'||I||'Valor:'||Micoleccion(I));
+
+	END IF;
+
+END LOOP;
+
+
+Es
+
+
+			Paquetes:
+
+un paquete es un contenedor de objetos pl-sql, son usados para empaquetar transaccionalidades a la base de datos,
+se pueden empaquetar:
+
+Variables escalares,compuestas funciones,procedimientos almacenados,
+cursores,cualquier tipo de variable se puede empaquetar
+
+Un paquete está compuesto por:
+
+Cabecera: Todo paquete tiene un encabezado: Las variables escalares o compuestas o tipo cursor que se vaya a usar, solo las
+identificaciones con los parametros.
+
+La cabecera y el cuerpo deben llamarse igual.
+
+
+Cuerpo: Programacion como tal de las operaciones.
+
+
+Hacer un paquete que almacene de una coleccion y haga dos procesos
+
+--------------------------------------------------------------------------------------------------------------
+CREATE OR REPLACE PACKAGE MiPaquete
+AS
+
+	--Se colocan las variables globales a usar que pueden ser usados en procedures y otros procesos
+	TYPE Micole Is TABLE OF VARCHAR2(100)
+	INDEX BY BINARY_INTEGER;
+    
+    Micoleccion Micole;
+
+	--los procedimientos acontinuación son invocados, no declarados
+	Procedure Llenar;
+	Procedure MuestreFor;
+	Procedure MuestreWhile;
+
+END Mipaquete;
+
+CREATE OR REPLACE PACKAGE BODY MiPaquete
+AS
+Procedure Llenar
+AS
+BEGIN
+	FOR I IN(SELECT ID AS IDD,APELLIDO||''||NOMBRE AS REGISTRO FROM ESTUDIANTES)
+	LOOP
+
+		Micoleccion(i.idd):= i.registro;
+            
+	END LOOP;
+    
+END Llenar;
+
+Procedure MuestreFor
+AS
+BEGIN
+Mipaquete.Llenar;
+FOR I IN Mipaquete.MiColeccion.first..Micoleccion.last
+LOOP
+	IF MiColeccion.Exists(I) THEN
+
+		DMBs_OUTPUT.PUT_LINE('indice:'||I||'Valor:'||Micoleccion(I));
+
+	END IF;
+
+END LOOP;
+END MuestreFor;
+
+END MiPaquete;
+/
+
+
+-------------------------------------------------------------------------------------------------------------
+
+
+
+crear una estructura matricial:
+
+Crear un paquete donde entre una especialidad y curso y hacer:
+en a fila 1 entra Musica y curso HIs102,
+en la primera fila entrar los id de los estudiantes que estan viendo el curso 1 vez,
+en la segunda fila los id de los estudiantes que estan viendo por segunda vez y así
+sucesivamente.
+
+si no hay alumnos, pues no se inserta.
+Hacer interfaz en apex.
+
+--CREO LA FILA
+TYPE REGIsTRO Is TABLE OF NUMBER(5)
+INDEX BY BINARY-INTEGER;
+
+TYPE COMPUEsTO Is TABLE OF REGIsTRO
+INDEX BY BINARY-INTEGER;
+
+MiMatriz Compuesto;
+
+
+
+
+MiMatriz(i)(i):=20;
+
+
+Nota:
+--No hay posición 0.
+
+
+
+
+
+

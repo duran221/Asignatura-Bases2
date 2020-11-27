@@ -1,0 +1,24 @@
+			Funciones:
+
+La siguiente es la estructura básica para crear funciones en pl-sql:
+
+--------------------------------------------------------------------------------------------------------
+CREATE [OR REPLACE] FUNCTION nombreFuncion([<param1> IN <type>, <param2> IN <type>,....])
+
+//Obligatorio debemos indicar el tipo de dato que retorna(NUMBER,VARCHAR2,DATE,...)
+RETURN <type>
+	
+	--Aquí se declaran variables.
+
+	
+
+BEGIN
+	--Instrucciones
+	
+	RETURN [RESULT]
+
+EXCEPTION
+
+
+
+END;

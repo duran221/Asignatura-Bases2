@@ -1,0 +1,166 @@
+				Triggers:
+
+
+For Each Row:
+
+
+
+Utilizados principalmente en AUDITORIA.
+Control de iteraciones.
+
+se implementan,habilitan, se desabilitan o se eliminan, NO sE ACTUALIZAN.
+se pueden reemplazar, NO ACTUALIZAR.
+
+
+Vienen con unas funciones (PseudoRegistros):
+
+
+
+Tienen una sintaxis:
+
+Usados UNICAMENTE EN  For Each Row:
+
+:nombreColumna.old: Valor viejo en la columna
+:nombreColumna.new: Valor nuevo en la columna
+
+
+DML		|:old		|:new
+
+INSERT		|new		|ValorNew
+
+UPDATE		|Valorold	|ValorNew
+
+DELETE		|Valorold	|NULL
+
+
+
+Los disparos for each row tienen tres funciones:
+
+inserting: devuelve un booleano que si el desencadenador de el disparo tiene que ver con una insercion devuelve true
+updating: realiza una funcion similar al anterior pero con operación de actualización
+deleting: realiza lo mismo con operación de borrado
+
+
+
+				Ejemplo:
+
+
+Realizar un describe a la tabla cambios y hacer un disparo que mantenga en la tabla cambios
+la información de las operaciones dml susitadas por cada fila, añadiendo, el usuario que la realizó
+y la fecha.
+
+No es conveniente usar un disparo ORDER porque este no mantiene la información de lo que habia antes ni despues
+en una tabla.
+
+
+
+
+En algunos casos el temporizador actúa exactamente igual con el disparo, sin embargo en algunos casos
+solamente para disparos for each row.
+
+Para este caso podemos usar cualquiera de los dos AFTER ó BEFORE
+
+-----------------------------------------------------------------------------------------------------------------
+
+
+CREATE OR REPLACE TRIGGER AUDITA
+BEFORE  insert or update or delete ON MATRICULAS
+FOR EACH ROW 
+--En el when va Sin doS puntoS el OLD: detallar
+--WHEN (old.nombre)='CARLOS'
+DECLARE
+
+    Vtipo CAMBIOS.TIPO%TYPE;
+    
+BEGIN
+
+    IF INSERTING THEN
+        
+        Vtipo:='I';
+        
+    ELSIF DELETING THEN
+        Vtipo:= 'D';
+    
+    ELSE
+    
+        Vtipo:= 'U';
+        
+    END IF;
+    
+    INSERT INTO CAMBIOS VALUES(Vtipo,USER,SYSDATE,:OLD.IDESTUDIANTE,:OLD.DEPARTAMENTO,:OLD.NCURSO,:OLD.GRADO,
+    :NEW.IDESTUDIANTE,:NEW.DEPARTAMENTO,:NEW.NCURSO,:NEW.GRADO);
+
+END AUDITA;
+
+
+INSERT INTO MATRICULAS VALUES(18,'BD2',122,'A');
+UPDATE MATRICULAS SET GRADO='B',DEPARTAMENTO='CTS',NCURSO=102
+WHERE IDESTUDIANTE>12;
+
+
+
+-----------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+CREAR TABLA CAMBIOS2 A PARTIR DE CAMBIOS IDENTICA. QUIERO QUE LA FECHA SEA TIMESTAMP, AÑADIR OTRA COLUMNA syd nombre de la base de datos,DIRECCIONIP,
+DIA DE LA SEMANA,NOMBRE DEL MES,NOMBRE DE EL EQUIPO DE DONDE HICIERON EL CAMBIO-
+
+SEGUNDO DISPARO:
+en un diSparo por cada dia de la Semana cuantoS cambioS Se han hecho
+eSte diSparo Seria Sobre la tabla cambioS, Seria dipo order.
+
+
+
+
+
+//Crear una tabla vacia con igual estructura.
+
+
+
+CREATE TABLE CAMBIOS2 AS (
+SELECT *
+FROM CAMBIOS
+WHERE 1 = 0) ;
+
+--Realizando los cambios necesarios:
+
+ALTER TABLE CAMBIOS2 MODIFY FECHA TIMESTAMP;
+ALTER TABLE CAMBIOS2 ADD  SYD VARCHAR2(50);
+ALTER TABLE CAMBIOS2 ADD  DIASEMANA VARCHAR2(30);
+ALTER TABLE CAMBIOS2 ADD  MES VARCHAR2(30);
+ALTER TABLE CAMBIOS2 ADD  NOMBREEQUIPO VARCHAR2(50);
+
+
+
+
+---------------------------------------------------------------------------------------------
+
+
+SELECT SYSDATE, TO_CHAR(SYSDATE,'DAY')
+FROM DUAL;
+
+--DIA DE SEMANA
+
+
+
+Para el taller:
+
+UN DIsPARO QUE CONTROLE QUE NO HAGA UN CAMBIO EN UN DIA DE OFICINA
+Es DE TIPO ORDER
+
+
+
+select sys_context('USERENV','DB_NAME') as Instance
+from dual;
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,212 @@
+
+SQL*Loader: Release 11.2.0.2.0 - Production on Mié Jun 5 08:26:08 2019
+
+Copyright (c) 1982, 2009, Oracle and/or its affiliates.  All rights reserved.
+
+Control File:   btcHotel.ctl
+Data File:      prueba.csv
+  Bad File:     prueba.bad
+  Discard File:  none specified
+ 
+ (Allow all discards)
+
+Number to load: ALL
+Number to skip: 0
+Errors allowed: 50
+Bind array:     64 rows, maximum of 256000 bytes
+Continuation:    none specified
+Path used:      Conventional
+
+Table PRUEBA, loaded from every logical record.
+Insert option in effect for this table: INSERT
+TRAILING NULLCOLS option in effect
+
+   Column Name                  Position   Len  Term Encl Datatype
+------------------------------ ---------- ----- ---- ---- ---------------------
+ID                                  FIRST     *   ;       CHARACTER            
+NOMBRE                               NEXT     *   ;       CHARACTER            
+DIRECCION                            NEXT     *   ;       CHARACTER            
+BARRIO                               NEXT     *   ;       CHARACTER            
+TELEFONO                             NEXT     *   ;       CHARACTER            
+CANTIDADCAMAS                        NEXT     *   ;       CHARACTER            
+CANTIDADHABITACIONES                 NEXT     *   ;       CHARACTER            
+PISCINA                              NEXT     *   ;       CHARACTER            
+ADMINISTRADOR                        NEXT     *   ;       CHARACTER            
+TELEFONO2                            NEXT     *  WHT      CHARACTER            
+
+Record 1: Rejected - Error on table PRUEBA, column ID.
+ORA-01722: invalid number
+
+Record 2: Rejected - Error on table PRUEBA, column TELEFONO.
+ORA-01722: invalid number
+
+Record 3: Rejected - Error on table PRUEBA, column TELEFONO.
+ORA-01722: invalid number
+
+Record 4: Rejected - Error on table PRUEBA, column TELEFONO.
+ORA-01722: invalid number
+
+Record 5: Rejected - Error on table PRUEBA, column TELEFONO.
+ORA-01722: invalid number
+
+Record 6: Rejected - Error on table PRUEBA, column TELEFONO.
+ORA-01722: invalid number
+
+Record 7: Rejected - Error on table PRUEBA, column TELEFONO.
+ORA-01722: invalid number
+
+Record 8: Rejected - Error on table PRUEBA, column TELEFONO.
+ORA-01722: invalid number
+
+Record 9: Rejected - Error on table PRUEBA, column TELEFONO.
+ORA-01722: invalid number
+
+Record 10: Rejected - Error on table PRUEBA, column TELEFONO.
+ORA-01722: invalid number
+
+Record 11: Rejected - Error on table PRUEBA, column TELEFONO.
+ORA-01722: invalid number
+
+Record 12: Rejected - Error on table PRUEBA, column TELEFONO.
+ORA-01722: invalid number
+
+Record 13: Rejected - Error on table PRUEBA, column TELEFONO.
+ORA-01722: invalid number
+
+Record 14: Rejected - Error on table PRUEBA, column TELEFONO.
+ORA-01722: invalid number
+
+Record 15: Rejected - Error on table PRUEBA, column TELEFONO.
+ORA-01722: invalid number
+
+Record 16: Rejected - Error on table PRUEBA, column TELEFONO.
+ORA-01722: invalid number
+
+Record 17: Rejected - Error on table PRUEBA, column TELEFONO.
+ORA-01722: invalid number
+
+Record 18: Rejected - Error on table PRUEBA, column TELEFONO.
+ORA-01722: invalid number
+
+Record 19: Rejected - Error on table PRUEBA, column TELEFONO.
+ORA-01722: invalid number
+
+Record 20: Rejected - Error on table PRUEBA, column TELEFONO.
+ORA-01722: invalid number
+
+Record 21: Rejected - Error on table PRUEBA, column TELEFONO.
+ORA-01722: invalid number
+
+Record 22: Rejected - Error on table PRUEBA, column TELEFONO.
+ORA-01722: invalid number
+
+Record 23: Rejected - Error on table PRUEBA, column TELEFONO.
+ORA-01722: invalid number
+
+Record 24: Rejected - Error on table PRUEBA, column TELEFONO.
+ORA-01722: invalid number
+
+Record 25: Rejected - Error on table PRUEBA, column TELEFONO.
+ORA-01722: invalid number
+
+Record 26: Rejected - Error on table PRUEBA, column TELEFONO.
+ORA-01722: invalid number
+
+Record 27: Rejected - Error on table PRUEBA, column TELEFONO.
+ORA-01722: invalid number
+
+Record 28: Rejected - Error on table PRUEBA, column TELEFONO.
+ORA-01722: invalid number
+
+Record 29: Rejected - Error on table PRUEBA, column TELEFONO.
+ORA-01722: invalid number
+
+Record 30: Rejected - Error on table PRUEBA, column TELEFONO.
+ORA-01722: invalid number
+
+Record 31: Rejected - Error on table PRUEBA, column TELEFONO.
+ORA-01722: invalid number
+
+Record 32: Rejected - Error on table PRUEBA, column TELEFONO.
+ORA-01722: invalid number
+
+Record 33: Rejected - Error on table PRUEBA, column TELEFONO.
+ORA-01722: invalid number
+
+Record 34: Rejected - Error on table PRUEBA, column TELEFONO.
+ORA-01722: invalid number
+
+Record 35: Rejected - Error on table PRUEBA, column TELEFONO.
+ORA-01722: invalid number
+
+Record 36: Rejected - Error on table PRUEBA, column TELEFONO.
+ORA-01722: invalid number
+
+Record 37: Rejected - Error on table PRUEBA, column TELEFONO.
+ORA-01722: invalid number
+
+Record 38: Rejected - Error on table PRUEBA, column TELEFONO.
+ORA-01722: invalid number
+
+Record 39: Rejected - Error on table PRUEBA, column TELEFONO.
+ORA-01722: invalid number
+
+Record 40: Rejected - Error on table PRUEBA, column TELEFONO.
+ORA-01722: invalid number
+
+Record 41: Rejected - Error on table PRUEBA, column TELEFONO.
+ORA-01722: invalid number
+
+Record 42: Rejected - Error on table PRUEBA, column TELEFONO.
+ORA-01722: invalid number
+
+Record 43: Rejected - Error on table PRUEBA, column TELEFONO.
+ORA-01722: invalid number
+
+Record 44: Rejected - Error on table PRUEBA, column TELEFONO.
+ORA-01722: invalid number
+
+Record 45: Rejected - Error on table PRUEBA, column TELEFONO.
+ORA-01722: invalid number
+
+Record 46: Rejected - Error on table PRUEBA, column TELEFONO.
+ORA-01722: invalid number
+
+Record 47: Rejected - Error on table PRUEBA, column TELEFONO.
+ORA-01722: invalid number
+
+Record 48: Rejected - Error on table PRUEBA, column TELEFONO.
+ORA-01722: invalid number
+
+Record 49: Rejected - Error on table PRUEBA, column TELEFONO.
+ORA-01722: invalid number
+
+Record 50: Rejected - Error on table PRUEBA, column TELEFONO.
+ORA-01722: invalid number
+
+Record 51: Rejected - Error on table PRUEBA, column TELEFONO.
+ORA-01722: invalid number
+
+
+MAXIMUM ERROR COUNT EXCEEDED - Above statistics reflect partial run.
+
+Table PRUEBA:
+  0 Rows successfully loaded.
+  51 Rows not loaded due to data errors.
+  0 Rows not loaded because all WHEN clauses were failed.
+  0 Rows not loaded because all fields were null.
+
+
+Space allocated for bind array:                 165120 bytes(64 rows)
+Read   buffer bytes: 1048576
+
+Total logical records skipped:          0
+Total logical records read:            61
+Total logical records rejected:        51
+Total logical records discarded:        0
+
+Run began on Mié Jun 05 08:26:08 2019
+Run ended on Mié Jun 05 08:26:10 2019
+
+Elapsed time was:     00:00:02.43
+CPU time was:         00:00:00.09

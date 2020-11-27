@@ -1,0 +1,178 @@
+			Funciones y Procedimientos:
+
+
+También llamados procedimientos almacenados: Es un bloque nominado que puede tener o no parametros y que puede ser invocado
+por usuarios que tengan privilegio sobre ese bloque.
+
+-Son objetos.
+-Hace parte de la integridad de la base de datos.
+			
+			Estructura
+
+--Nombre atomico
+--Si hay parametros se coloca parentesis, de resto no es necesario:
+
+			Tipo de ejecución:
+
+IN: Lectura o de entrada: El valor es leido por otra variable de declarada: No puede escribir de en el, sólo lectura
+OUT: Escritura o de salida: Puede escribir dentro de ese parametro, pero no puede leer de el
+IN OUT: Maneja las dos funcionalidades anteriores.
+
+
+----------------------------------			------------------------------------------------
+
+CREATE OR REPLACE PROCEDURE NOMBRE (Parametro1 TEjecucion TipoEscalar,Parametro1 TEjecucion TipoEscalar DEFAULT 1)
+
+AS/IS
+
+	---Declaración de variables locales;
+
+
+BEGIN
+
+	--Operaciones ó Transacciones;
+
+EXCEPTION
+
+	--Excepciones;
+
+
+END NOMBRE;
+SHOW ERRORS;
+
+-----------------------------------------------					---------------------------------
+
+
+					Ejemplo:
+
+
+A travez de un procedimiento llamado AGREGAR_E que reciba un nombre,apellido,especialidad y unos créditos
+Insertar una nueva fila en la tabla estudiantes.
+
+--Observación:El id debe ser calculado automaticamente.
+
+-----------------------------------------------					---------------------------------
+
+--Se recomienda no dejar lineas en blanco
+CREATE OR REPLACE PROCEDURE AGREGARE(
+Vnom IN ESTUDIANTES.NOMBRE%TYPE,
+Vape IN ESTUDIANTES.APELLIDO%TYPE,
+Vesp IN ESTUDIANTES.ESPECIALIDAD%TYPE,
+Vcred IN ESTUDIANTES.CREDITOS%TYPE DEFAULT 1
+)
+
+AS
+    Vid NUMBER:=0;
+BEGIN
+    SELECT MAX(ID)+1
+    INTO Vid
+    FROM ESTUDIANTES;
+    
+    INSERT INTO ESTUDIANTES 
+        VALUES(Vid,INITCAP(Vnom),INITCAP(Vape),INITCAP(Vesp),Vcred);
+        
+END AGREGARE;
+/
+SHOW ERRORS;
+
+EXECUTE AGREGARE('Pedro','Picapiedra','Ingenieria',5);
+EXECUTE AGREGARE('Tumaco','Giron','Ingenieria',3);
+
+-----------------------------------------------					---------------------------------
+
+
+					Eliminar
+
+Para eliminar un procedimiento almacenado se hace con:
+
+DROP PROCEDURE AGREGARE;
+
+
+
+					Invocar un Procedimiento Almacenado(Llamar)
+
+
+1.Solamente para procedimientos: Cuando no hay begin
+EXECUTE AGREGARE('Pedro','Picapiedra','Ingenieria',5);
+
+2.A travez de un bloque anónimo:
+----------------------------------------			-------------------------------------------
+DECLARE
+	
+	V1 VARCHAR2(35):='Marta';
+	V2 VARCHAR2(35):='Puerta';
+	V3 VARCHAR2(35):='Musica';
+
+BEGIN
+	
+	AGREGARE(V1,V2,V3,1);
+
+
+END;
+
+----------------------------------------			-------------------------------------------
+
+Con notación nominal: Significa que no le importa la posición de los párametros
+Invocación nominal
+
+DECLARE
+	
+	V1 VARCHAR2(35):='&nombre';
+	V2 VARCHAR2(35):='&apellido';
+	V3 VARCHAR2(35):='&especialidad';
+	V4 NUMBER:=&creditos;
+
+BEGIN
+	
+	AGREGARE(V2->Vape,V1->Vnom,V4->Vcred,V3->Vesp);
+
+END;
+
+----------------------------------------			-------------------------------------------
+
+
+2.
+
+Hacer un procedimiento almacenado en donde ingresa un número cualquiera y una especialidad y ese procedimiento va a 
+actualizar los creditos de los estudiantes que estudian esa especialidad incrementandoles ese número que ingreso
+se va a llamar ModifiqueE creditos, opera siempre y cuando esos creditos no desborden a el mínimo de creditos
+
+
+A todos los estudiantes que estudian 'Musica' y que estan matriculados, les va a actualizar los creditos
+teniendo en cuenta que el numero no sea inferior a el minimo de creditos, o que no sea superior a el máximo de creditos
+si lo desborda mostrar un mensaje
+
+Validar que la especialidad exista.
+Los creditos desbordan en Num el valor de creditos
+Mostrar un mensaje que diga cuantos procesó (Actualizó)
+
+
+-----------------------------------------------					---------------------------------
+
+
+
+CREATE OR REPLACE PROCEDURE ModifiqueE(
+Vnumero IN NUMBER,
+Vespecialidad IN ESTUDIANTES.ESPECIALIDAD%TYPE
+)
+AS
+    cantidad_especialidad NUMBER:=0;
+
+
+BEGIN
+    
+    --Validar que exista la especialidad:
+    select * from Estudiantes est JOIN Matriculas mat on est.id=mat.idestudiante;
+
+
+
+END ModifiqueE;
+
+
+--------------------------------------------                          ------------------------------------------
+
+
+Leer sobre funciones almacenadas.
+
+
+Buscar el plano llamado Accidentes de tránsito en medellín

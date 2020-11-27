@@ -1,0 +1,62 @@
+					Archivos Planos:
+
+
+Son un conjunto de bits estructurado por un delimitador, el cual es un caracter que indica el principio y el fin de una
+determinada consulta, es el lenguaje universal.
+
+Extensiones:CSV,TXT,SDF,RDF entre otros que puenden ser procesados en la web: XML,HTML.
+					
+					OPEN DATA:
+
+Repositorio que creo el gobierno santos donde puede descargarse cualquier set de datos sobre entidades oficiales
+y no oficiales.
+
+descargar del OPENDATA EN formato CSV
+
+
+1. Limpieza de caracteres:
+
+	Datos
+	Obtener datos externos
+	Desde un archivo de texto
+	
+	Establecer delimitador con COMA
+	Se reemplaza , de numeros por espacios
+
+Subida de archivos planos:
+
+csv delimitado por comas
+
+sqlplus
+
+hr
+hr
+
+
+buscar el archivo crear tabla y ejecutar en linea de comandos
+
+
+str: archivos de control en lenguaje propio de base de datos
+
+excel los termina con punto y coma
+
+sqldrr:Es el que hace el tunel:
+
+
+
+					
+
+nombre	direccion	barrio	telefono	cantidadcamas	cantidadhabitaciones	piscina	administrador	telefono2
+
+
+
+
+
+EN BASE DE DATOS ORACLE: PARA ARCHIVOS PEQUEÑOS, NO RECOMENDADO PARA ARCHIVOS GRANDES
+
+
+TRABAJO:
+
+2.SUBIR PARA LA PROXIMA CLASE DE LAS DOS MANERAS: LA CADENA DE EXPORTACIÓN DE EL CAFÉ. OPENDATA. 
+
+2. SI QUITA LAS COMAS EN EXCEL SE TIRA EL DECIMAL.

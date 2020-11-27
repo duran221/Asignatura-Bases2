@@ -1,0 +1,96 @@
+
+
+1. Crear aplicacion.
+2.New Aplication
+3. Activar contro de acceso opcional
+4. seleccion de estilo de tema
+5. Guardar aplicacion
+6. Ejecutar.
+7. Theme Roller actualiza el aspecto grafico (parte inferior)
+8. guardar cambios y definir como actual.
+9. En administracion se puede cambiar el tema de la aplicacion
+10. Dar click en editar pagina 1
+Parte izquierda se generan los objetos.
+Parte superior dar click en + y crear pagina en blanco (desde cero)
+11. Dar un nombre. Next
+12. Crear entrada nueva
+13. Terminar.
+Ejecutar para verificar que funcione.
+
+
+14. Editar pagina 2 (Buscador).
+Regiones -> Crear Region ->Nombre Buscador---Guardar cambio
+Click derecho-- crear elemento de pagina
+
+Defininir el tipo de dato
+guardar
+
+Crear un botón:
+Editar pagina 2.
+
+Creando la acción de el boton buscar:
+Click derecho crear accion dinamica
+Dar un nombre: Procesar-- tipo click-elegir el boton- tipo de seleccion...
+
+Accion: ejecutar codigo pl sql
+
+solo recibe bloques anonimos en este espacio
+
+
+
+DECLARE
+    MENSAJE VARCHAR2(100) := 'NO EXISTE ID';
+
+BEGIN
+
+    
+    SELECT 
+        TRIM(INITCAP(APELLIDO))||' '||
+        TRIM(INITCAP(NOMBRE))||' '||
+        TRIM(INITCAP(APELLIDO))
+        INTO :INFO
+        FROM ESTUDIANTES
+        WHERE ID= :ID;
+
+EXCEPTION
+    WHEN NO_DATA_FOUND THEN
+    
+        :INFO:= MENSAJE||' '||:ID;
+        
+        
+END;
+
+
+CAMPO A VALIDAR ID
+CAMPO A C
+
+
+
+
+DECLARE
+
+    CURSOR CUENTA IS SELECT DEPARTAMENTO,NCURSO,COUNT(*) CUENTA FROM MATRICULAS
+        WHERE IDESTUDIANTE= :ID
+        GROUP BY DEPARTAMENTO,NCURSO;
+
+    CONDICION BOOLEAN:=FALSE;
+BEGIN
+
+    FOR I IN CUENTA
+    LOOP
+    
+        IF I.CUENTA>1 THEN
+        
+            :REPITENCIA:= 'SI';
+        
+        ELSE
+            
+            :REPITENCIA:= 'NO';
+            
+        END IF;
+    
+    
+    END LOOP;
+    
+
+END;

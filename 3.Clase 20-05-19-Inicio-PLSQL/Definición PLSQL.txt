@@ -1,0 +1,212 @@
+				Plsql:
+
+Definición:Lenguaje Procedural Orientado a objetos
+
+				Bloques:
+Los Bloques tienen Tienen una plantilla y es la siguiente:
+
+---------------------------------------------
+Declare:
+--Zona de declaranción de variable
+
+
+--
+BEGIN
+
+
+EXCEPTION
+
+
+END
+--------------------------------------------------------------
+			Variables: 
+
+Pueden ser de dos tipos: SIMPLES ó Compuestas (Simple-Composite):
+
+
+			Simples (Escalares): 
+
+
+Tipos de datos que tienen que ver con los atributos de una tabla, almacena un único valor:
+-NUMBER
+-INTEGER
+-VARCHAR2
+-CHAR
+-BOOLEAN
+
+
+			Compuestas:
+
+Almacenan varios datos:
+-Array
+-Varray
+-Record
+-Matriciales
+
+			Otro tipos de variable:
+CLOB
+BLOB: Almacenamiento de archivos multimedia (Videos-Musica-Imagenes)
+
+
+Nota: Todas las variables deben EMPEZAR POR UNA LETRA:
+Nota: Al momento de declarar una variable puede inicializarla:
+
+--------------------------------------------------------------------------
+
+				Bloques:
+
+Bloques anonimos:Se ejecutan una sola vez
+
+
+Bloques Nominados(Almacenados):
+Donde van los disparadores
+
+
+
+				Bloque anónimo:
+
+DECLARE
+--Zona de declaración
+Vn VARCHAR2(35):='Cristian';
+Vs NUMBER(8) :=50000;
+--Tres espacios de los cuales dos son decimales:
+Vx NUMBER(3,2) := 1.90;
+
+
+--Lo siguiente estaría malo en el DECLARE:
+--Vn:=30;	Para eso está el BEGIN:
+--No insert, No declare , No update
+
+BEGIN:
+--Toda la lógica de programacion
+--Todas las operaciones DML ()
+--Por ahora no se usa INSERT aquí.
+
+--Mostrando nuestro nombre en la base de dato
+dbms_output.put_line('Nombre: ' || Vn || ' Salario: ' || Vs || 'Estatura: ' || Vx); 
+
+
+EXCEPTION:
+--Zona de control de errores:
+
+
+--todo BEGIN tiene un END;
+END;
+
+
+
+--Activar salida cuando trabajamos por consola: set serveroutput on;
+
+
+------------------------------------------------------------------------------------
+				Proceso en sql:
+
+
+Conectarnos a la base de datos: En el terminal:
+
+-->conn hr/hr 
+conected-->
+
+TAMBIEN:
+-->conn
+-->user:
+-->password
+
+
+--Me indica en que direccion de sistema operativo estoy creando mis scripts:
+-->host
+-->dir *.sql --Buscar todos los script con extensión sql:
+-->edit carga --Abre o crea un archivo para escribir scripts sql
+-->@carga ---Ejecuta el script
+
+
+--Para ver la estructura de una table:
+-->DESCRIBE ESTUDIANTES
+
+Resultados:
+
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ ID                                        NOT NULL NUMBER
+ NOMBRE                                             CHAR(20)
+ APELLIDO                                           CHAR(20)
+ ESPECIALIDAD                                       CHAR(30)
+ CREDITOS                                           NUMBER(2)
+
+Detalle: NOT NULL significa (Llave Primaria):
+
+--mostrar el nombre,apellido, lo que se estudia y cuantos años tiene:
+
+---------------------------------------------------------------------------------
+
+				Condicionales:
+
+Deben ir en la zona de ejecución.
+
+
+BEGIN
+IF <CONDICION> THEN
+	--BLOQUE;
+
+END IF;
+
+END;
+
+En la condicion pueden aparecer operadores lógicos: OR || AND NOT || 
+Operadores de comparacion: < MENOR || > MAYOR || != DISTINTO || <> DINSTINTO
+
+-------------------------------------------------------------------------------------
+				Ejercicios:
+
+
+1--Primer ejercicio:
+Hacer un bloque anónimo que diga, esta en lo cierto, si el dia de hoy es lunes:
+--Para manejo de dias, el primer dia empieza con Domingo 1
+
+
+
+
+
+2--Almacenar en la tabla TEMPORAL:
+Desarrolle o implemente un bloque que almacene en la tabla TEMPORAL
+La especialidad de el estudiante cuyo ID  es igual a un valor que entra por teclado
+
+
+				Nota:
+Cuando se materializa una consulta con la palabra reservada INTO es porque la consula devuelve un solo valor (UNA SOLA FILA),
+para otro tipo de consultas se usan cursores:
+
+-Materializar: guardar esa informacion en algún lugar:
+
+SELECT ESPECIALIDAD 
+    INTO VESP
+    FROM ESTUDIANTES
+    WHERE ID=VID;
+
+			Ejercicio Calificativo:
+
+Hacer un script ingresar un nombre y guardarlo en la tabla temporal la palabra Si o No
+La palabra si, el nombre existe,
+La palabra no, si no existe.
+
+
+
+			Ejercicios Tarea:
+
+
+Grupal 2:
+
+Entrar un grado por teclado y devolver un mensaje que me diga CUANTOS estudiantes estan matriculados en ese grado;
+Entrar un grado por teclado y devolver un mensaje que me diga CUANTOS estudiantes no estan matriculados en ese grado;
+
+Nota:Todo se hace sobre la tabla MATRICULA
+
+En temporal debe salir, están matriculados tantos, no están matriculados, tantos:
+
+
+			Tarea:
+
+Hacer un bloque anonimo que dada una cadena de texto y una especialidad almacene en temporal el número de personas cuyo nombre
+contienen dicha cadena de texto en esa especialidad.
+
+Entra una espcialidad y decir a travez de mensaje cuantos alumnos que estudian esa especialidad no estan matriculados en ningun curso

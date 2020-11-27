@@ -1,0 +1,174 @@
+				Ejercicio práctico
+
+Rellenar la tabla temporal con los números comprendidos entre 100 y 200
+
+
+
+---------------------------------------Solución usando LOOP:---------------------------------------------
+DECLARE 
+
+    Vi NUMBER:=100;
+    Vf NUMBER:=200;
+
+
+BEGIN
+    DELETE FROM TEMPORAL;
+    
+    LOOP
+    
+        INSERT INTO TEMPORAL(COLUMNANUMERICA) VALUES(Vi);
+    
+        EXIT WHEN Vi=Vf;
+        Vi:= Vi+1;
+    
+    END LOOP;
+
+END;
+
+
+-------------------------------------Solución usando While----------------------------------------
+
+DECLARE 
+
+    Vi NUMBER:=100;
+    Vf NUMBER:=200;
+
+
+BEGIN
+    DELETE FROM TEMPORAL;
+    
+    WHILE Vi<=Vf
+	LOOP
+    
+        	INSERT INTO TEMPORAL(COLUMNANUMERICA) VALUES(Vi);
+    
+        	Vi:= Vi+1;
+    
+    	END LOOP;
+
+END;
+
+
+----------------------------------Solución usando FOR---------------------------------------
+
+DECLARE 
+
+    Vi NUMBER:=100;
+    Vf NUMBER:=200;
+
+
+BEGIN
+    DELETE FROM TEMPORAL;
+    
+    FOR i IN  Vi..Vf
+	LOOP
+
+		INSERT INTO TEMPORAL(COLUMNANUMERICA) VALUES(i);
+
+	END LOOP;
+
+END;
+
+---------------------------------------------------             -----------------------------------
+
+
+
+				Ejercicio Numero 2:
+
+
+
+Hacer con WHILE:
+
+--pedir un numero por teclado comprendido entre 1 y 9, insertar en la tabla temporal
+--insertar los id de las personas que son multiplos de esos numeros, pero cuando ese id, el nombre y el apellido
+--empiece por consonante, insertar el nombre y el apellido n veces;
+
+
+que sea menor o igual a el número de veces
+
+
+-------------------------------------------     Tarea:           --------------------------------------------
+
+Mostrar por pantalla los nombres, apellidos de los estudiantes  que están matriculados a travéz de un bloque
+
+
+decir cuantos estan matriculados y cuantos no de el ejercicio anterior;
+
+--------------------------------------------       Usando Cursores Explicitos  ------------------------------------------------
+
+
+BEGIN
+
+	OPEN MIC;
+
+	FETCH MIC INTO Vn,Va;
+
+WHILE Mic%FOUND
+
+	LOOP
+
+	dbms_output.put_line(Vn || Va);
+
+	EXIT WHEN Mic%NOTFOUND;
+	
+	FETCH Mic INTO Vn,Va;
+	
+	END LOOP;
+
+CLOSE Mic;
+
+
+END;
+
+
+
+------------------------------------------------                        ---------------------------------------------------------------------
+set SERVEROUTPUT on;
+
+DECLARE
+
+    Vn Estudiantes.nombre%type;
+    Va Estudiantes.apellido%type;
+    
+    --Acontinuación defino el cursor explicito:
+    CURSOR Mic IS SELECT DISTINCT E.nombre,E.apellido
+                    FROM ESTUDIANTES E join MATRICULAS M ON E.ID=M.IDESTUDIANTE;
+
+    
+BEGIN
+    --Primero debo abrir el cursor, siempre y cuando use LOOP ó FOR:
+    --Cuando abro el cursor se ejecuta la consulta Sql asociada
+    OPEN Mic;
+    
+    LOOP
+        --Cada que yo extraigo el apuntador automaticamente baja a la siguiente fila
+        FETCH Mic into Vn,Va;
+        EXIT WHEN MIC%NOTFOUND;
+        dbms_output.put_line(Vn || Va);
+
+    END LOOP;
+    
+    
+    --Cerrando el cursor para liberar memoria:
+    CLOSE Mic;
+
+END;
+
+
+
+-----------------------------------------------    TRABAJOS PARA ENTREGAR            ---------------------------------------------------------------------
+
+					Tarea: Hacer el ejercicio con cursores.
+
+
+3. ENTREGAR A MANO
+2.  Hay una columna en en cursos que indica cuántos estudiantes están matriculados en un curso
+Hacer un bloque anónimo que cuando se ejecute ese bloque mantenga la información de cuántos estudiantes hay por curso
+es decir. 
+
+Leer sobre manejo de tablas externas, openData
+Consultar para la próxima clase cursor parametrizado:
+
+----------------------------------------------------------------------------------------------------------------------------------------------------
+
+

@@ -1,0 +1,56 @@
+
+-------------------------------------------------------------------------------------
+				Ejercicios:
+
+
+1--Primer ejercicio:
+Hacer un bloque anónimo que diga, esta en lo cierto, si el dia de hoy es lunes:
+--Para manejo de dias, el primer dia empieza con Domingo 1
+
+
+
+
+
+2--Almacenar en la tabla TEMPORAL:
+Desarrolle o implemente un bloque que almacene en la tabla TEMPORAL
+La especialidad de el estudiante cuyo ID  es igual a un valor que entra por teclado
+
+
+				Nota:
+Cuando se materializa una consulta con la palabra reservada INTO es porque la consula devuelve un solo valor (UNA SOLA FILA),
+para otro tipo de consultas se usan cursores:
+
+-Materializar: guardar esa informacion en algún lugar:
+
+SELECT ESPECIALIDAD 
+    INTO VESP
+    FROM ESTUDIANTES
+    WHERE ID=VID;
+
+			Ejercicio Calificativo:
+
+Hacer un script ingresar un nombre y guardarlo en la tabla temporal la palabra Si o No
+La palabra si, el nombre existe,
+La palabra no, si no existe.
+
+
+
+			Ejercicios Tarea:
+
+
+Grupal 2:
+
+Entrar un grado por teclado y devolver un mensaje que me diga CUANTOS estudiantes estan matriculados en ese grado;
+Entrar un grado por teclado y devolver un mensaje que me diga CUANTOS estudiantes no estan matriculados en ese grado;
+
+Nota:Todo se hace sobre la tabla MATRICULA
+
+En temporal debe salir, están matriculados tantos, no están matriculados, tantos:
+
+
+			Tarea:
+
+Hacer un bloque anonimo que dada una cadena de texto y una especialidad almacene en temporal el número de personas cuyo nombre
+contienen dicha cadena de texto en esa especialidad.
+
+Entra una espcialidad y decir a travez de mensaje cuantos alumnos que estudian esa especialidad no estan matriculados en ningun curso

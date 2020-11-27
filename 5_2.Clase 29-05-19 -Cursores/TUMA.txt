@@ -1,0 +1,19 @@
+DECLARE
+    n number;
+    cantidadEstudiante number;
+    cursor X is select * from cursos;
+BEGIN
+    FOR CURSO IN X LOOP
+        SELECT COUNT(*) INTO cantidadEstudiante  FROM
+        MATRICULAS JOIN estudiantes ON estudiantes.ID=matriculas.idestudiante 
+        JOIN cursos ON cursos.ncurso=MATRICULAS.NCURSO AND CURSOS.DEPARTAMENTO=matriculas.departamento WHERE CURSOS.NCURSO=CURSO.NCURSO AND
+        CURSOS.DEPARTAMENTO=CURSO.DEPARTAMENTO;
+    
+        
+
+    END FOR;
+
+END;
+select * from ESTUDIANTES;
+SELECT * FROM MATRICULAS;
+SELECT * FROM CURSOS
